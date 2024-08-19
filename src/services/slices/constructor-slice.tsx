@@ -13,44 +13,30 @@ type TInitialState = {
 
 const initialState: TInitialState = {
   bun: null,
-  // bun: {
-  //   _id: '',
-  //   name: '',
-  //   type: '',
-  //   proteins: 0,
-  //   fat: 0,
-  //   carbohydrates: 0,
-  //   calories: 0,
-  //   price: 0,
-  //   image: '',
-  //   image_large: '',
-  //   image_mobile: '',
-  //   id: ''
-  // },
   ingredients: []
 };
 
 const constructorSlice = createSlice({
-  name: 'constructor',
+  name: 'constructorBurger',
   initialState,
   reducers: {
     addItem: {
       reducer: (state, action: PayloadAction<TConstructorIngredient>) => {
         const type = action.payload.type;
 
-        // switch (type) {
-        //   case 'bun':
-        //     state.bun = action.payload;
-        //     break;
-        //   default:
-        //     state.ingredients.push(action.payload);
-        // }
-
-        if (type === 'bun') {
-          state.bun = action.payload;
-        } else {
-          state.ingredients.push(action.payload);
+        switch (type) {
+          case 'bun':
+            state.bun = action.payload;
+            break;
+          default:
+            state.ingredients.push(action.payload);
         }
+
+        // if (type === 'bun') {
+        //   state.bun = action.payload;
+        // } else {
+        //   state.ingredients.push(action.payload);
+        // }
       },
       prepare: (item: TIngredient) => {
         const id = nanoid();
@@ -65,20 +51,22 @@ const constructorSlice = createSlice({
     clearConstructor: (state) => {
       state.bun = null;
       state.ingredients = [];
-    }
+    },
+    moveUp: (state) => {},
+    moveDown: (state) => {}
   },
   selectors: {
-    getConstructorItems: (state) => state,
-    getConstructorBuns: (state) => state.bun,
-    getConstructorIngredients: (state) => state.ingredients
+    getConstructorItems: (state) => state
+    // getConstructorBuns: (state) => state.bun,
+    // getConstructorIngredients: (state) => state.ingredients
   }
 });
 
 export const constructorReducer = constructorSlice.reducer;
 export const {
-  getConstructorItems,
-  getConstructorBuns,
-  getConstructorIngredients
+  getConstructorItems
+  // getConstructorBuns,
+  // getConstructorIngredients
 } = constructorSlice.selectors;
 export const { addItem, removeItem, clearConstructor } =
   constructorSlice.actions;

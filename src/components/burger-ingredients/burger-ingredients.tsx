@@ -10,13 +10,13 @@ import {
 import { useDispatch, useSelector } from '../../services/store';
 
 export const BurgerIngredients: FC = () => {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const ingredients = useSelector(getIngredientsSelector);
-  // useEffect(() => {
-  //   if (!ingredients.length) {
-  //     dispatch(fetchIngredients());
-  //   }
-  // }, []);
+  useEffect(() => {
+    if (!ingredients.length) {
+      dispatch(fetchIngredients());
+    }
+  }, []);
 
   /** TODO: взять переменные из стора */
   const buns = ingredients.filter((element) => element.type === 'bun');

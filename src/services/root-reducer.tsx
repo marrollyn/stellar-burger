@@ -4,5 +4,5 @@ import { constructorReducer } from './slices/constructor-slice';
 
 export const rootReducer = combineReducers({
   ingredients: ingredientsReducer,
-  constructor: constructorReducer
+  constructorBurger: constructorReducer
 });

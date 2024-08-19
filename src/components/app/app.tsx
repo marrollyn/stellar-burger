@@ -33,16 +33,15 @@ const App = () => {
   const dispatch = useDispatch();
   const location = useLocation();
   const backgroundLocation = location.state?.background;
-  const ingredients = useSelector(getIngredientsSelector);
+  // const ingredients = useSelector(getIngredientsSelector);
   function goBack() {
     navigate(-1);
   }
-  useEffect(() => {
-    dispatch(fetchIngredients());
-    console.log(ingredients);
-  }, []);
-  const ingredients2 = useSelector(getIngredientsSelector);
-  console.log(ingredients2);
+  // useEffect(() => {
+  //   dispatch(fetchIngredients());
+  // }, []);
+  // const ingredients = useSelector(getIngredientsSelector);
+  // console.log(ingredients);
   return (
     <div className={styles.app}>
       <AppHeader />
