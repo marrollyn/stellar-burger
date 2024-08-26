@@ -95,7 +95,10 @@ const App = () => {
             <Route
               path='/ingredients/:id'
               element={
-                <Modal title={'Детали ингридиента'} onClose={goBack}>
+                <Modal
+                  title={'Детали ингридиента'}
+                  onClose={() => navigate(-1)}
+                >
                   <IngredientDetails />
                 </Modal>
               }
