@@ -43,7 +43,7 @@ const constructorSlice = createSlice({
         return { payload: { ...item, id } };
       }
     },
-    removeItem: (state, action) => {
+    deleteItem: (state, action) => {
       state.ingredients = state.ingredients.filter(
         (item) => item.id !== action.payload
       );
@@ -68,5 +68,5 @@ export const {
   // getConstructorBuns,
   // getConstructorIngredients
 } = constructorSlice.selectors;
-export const { addItem, removeItem, clearConstructor } =
+export const { addItem, deleteItem, clearConstructor } =
   constructorSlice.actions;
