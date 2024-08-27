@@ -22,9 +22,9 @@ export const BurgerIngredients: FC = () => {
   const buns = ingredients.filter((element) => element.type === 'bun');
   const mains = ingredients.filter((element) => element.type === 'main');
   const sauces = ingredients.filter((element) => element.type === 'sauce');
-  console.log(buns);
-  console.log(mains);
-  console.log(sauces);
+  // console.log(buns);
+  // console.log(mains);
+  // console.log(sauces);
 
   const [currentTab, setCurrentTab] = useState<TTabMode>('bun');
   const titleBunRef = useRef<HTMLHeadingElement>(null);

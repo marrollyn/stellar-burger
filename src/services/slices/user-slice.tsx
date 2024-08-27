@@ -39,7 +39,58 @@ const userSlice = createSlice({
     getAuthChecked: (state) => state.isAuthChecked,
     getUser: (state) => state.data
   },
-  extraReducers: (builder) => {}
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchRegister.pending, (state) => {
+        state.error = null;
+      })
+      .addCase(fetchRegister.rejected, (state, action) => {
+        state.error = action.error?.message || null;
+      })
+      .addCase(fetchRegister.fulfilled, (state, action) => {
+        state.isAuthChecked = true;
+        state.error = null;
+        state.data = action.payload.user;
+      });
+    builder
+      .addCase(fetchGetUser.rejected, (state, action) => {
+        state.isAuthChecked = false;
+        state.error = action.error?.message || null;
+      })
+      .addCase(fetchGetUser.fulfilled, (state, action) => {
+        state.isAuthChecked = true;
+        state.data = action.payload.user;
+        state.error = null;
+      });
+    builder
+      .addCase(fetchLogin.pending, (state) => {
+        state.isAuthChecked = false;
+        state.error = null;
+      })
+      .addCase(fetchLogin.rejected, (state, action) => {
+        state.isAuthChecked = false;
+        state.error = action.error.message!;
+      })
+      .addCase(fetchLogin.fulfilled, (state, action) => {
+        state.isAuthChecked = true;
+        state.error = null;
+        state.data = action.payload.user;
+      });
+    builder.addCase(fetchLogout.fulfilled, (state) => (state = initialState));
+    builder
+      .addCase(fetchUpdateUser.pending, (state) => {
+        state.error = null;
+      })
+      .addCase(fetchUpdateUser.rejected, (state, action) => {
+        state.isAuthChecked = false;
+        state.error = action.error.message!;
+      })
+      .addCase(fetchUpdateUser.fulfilled, (state, action) => {
+        state.isAuthChecked = true;
+        state.data = action.payload.user;
+        state.error = null;
+      });
+  }
 });
 
 export const fetchRegister = createAsyncThunk(
@@ -47,6 +98,13 @@ export const fetchRegister = createAsyncThunk(
   registerUserApi
 );
 export const fetchLogin = createAsyncThunk('user/fetchLogin', loginUserApi);
+export const fetchLogout = createAsyncThunk('user/fetchLogout', logoutApi);
+export const fetchUpdateUser = createAsyncThunk(
+  'user/fetchUpdateUser',
+  updateUserApi
+);
+export const fetchGetUser = createAsyncThunk('user/fetchGetUser', getUserApi);
+
 export const fetchForgotPassword = createAsyncThunk(
   'user/fetchForgotPassword',
   forgotPasswordApi
@@ -55,12 +113,6 @@ export const fetchResetPassword = createAsyncThunk(
   'user/resetPassword',
   resetPasswordApi
 );
-export const fetchLogout = createAsyncThunk('user/fetchLogout', logoutApi);
-export const fetchUpdateUser = createAsyncThunk(
-  'user/fetchUpdateUser',
-  updateUserApi
-);
-export const fetchGetUser = createAsyncThunk('user/fetchGetUser', getUserApi);
 
 export const { getAuthChecked, getUser } = userSlice.selectors;
 export const userReducer = userSlice.reducer;

@@ -5,12 +5,12 @@ import { Preloader } from '../ui/preloader/preloader';
 
 type TProtectedRouteProps = {
   onlyUnAuth?: boolean;
-  children: React.JSX.Element;
+  component: React.JSX.Element;
 };
 
 export const ProtectedRoute = ({
   onlyUnAuth = false,
-  children
+  component
 }: TProtectedRouteProps) => {
   const isAuthChecked = useSelector(getAuthChecked);
   const user = useSelector(getUser);
@@ -29,12 +29,17 @@ export const ProtectedRoute = ({
     return <Navigate replace to='/login' state={{ from: location }} />;
   }
 
-  return children;
+  return component;
 };
 
 // //чтобы пропускать только авторизованных пользователей
 // export const OnlyAuth = ProtectedRoute;
 // //чтобы пропускать только неавторизованных
-// export const OnlyUnAuth = ({children }: { children: React.JSX.Element }) => (
-//   <ProtectedRoute onlyUnAuth children={children} />
+// export const OnlyUnAuth = ({component }: { component: React.JSX.Element }) => (
+//   <ProtectedRoute onlyUnAuth component={component} />
 // );
+
+export const OnlyAuth = ProtectedRoute;
+export const OnlyUnAuth = ({ component }: { component: React.JSX.Element }) => (
+  <ProtectedRoute onlyUnAuth component={component} />
+);
