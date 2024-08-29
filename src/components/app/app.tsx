@@ -6,7 +6,8 @@ import {
   ResetPassword,
   Profile,
   ProfileOrders,
-  NotFound404
+  NotFound404,
+  Feed
 } from '@pages';
 import '../../index.css';
 import styles from './app.module.css';
@@ -31,7 +32,7 @@ import {
   fetchIngredients,
   getIngredientsSelector
 } from '../../services/slices/ingredient-slice';
-import { getUser, fetchGetUser } from '../../services/slices/user-slice';
+import { getUser, checkUserAuth } from '../../services/slices/user-slice';
 
 const App = () => {
   const navigate = useNavigate();
@@ -46,7 +47,7 @@ const App = () => {
     if (!ingredients.length) {
       dispatch(fetchIngredients());
     }
-    dispatch(fetchGetUser());
+    dispatch(checkUserAuth());
   }, []);
   // const ingredients = useSelector(getIngredientsSelector);
   // console.log(ingredients);
@@ -160,7 +161,7 @@ const App = () => {
             </Modal>
           }
         />
-        {/* <Route path='/feed' element={<Feed />} /> */}
+        <Route path='/feed' element={<Feed />} />
         <Route path='/feed/:number' element={<OrderInfo />} />
         <Route path='/login' element={<OnlyUnAuth component={<Login />} />} />
         <Route
