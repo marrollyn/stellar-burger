@@ -121,8 +121,8 @@ export const fetchLogin = createAsyncThunk(
 );
 export const fetchLogout = createAsyncThunk('user/fetchLogout', async () => {
   await logoutApi();
-  deleteCookie('accessToken');
   localStorage.removeItem('refreshToken');
+  deleteCookie('accessToken');
 });
 export const fetchUpdateUser = createAsyncThunk(
   'user/fetchUpdateUser',

@@ -193,10 +193,7 @@ const App = () => {
           <Route
             path='/feed/:number'
             element={
-              <Modal
-                title={`#0${location.pathname.match(/\d+/)}`}
-                onClose={goBack}
-              >
+              <Modal title='Детали заказа' onClose={goBack}>
                 <OrderInfo />
               </Modal>
             }
@@ -214,10 +211,7 @@ const App = () => {
             element={
               <OnlyAuth
                 component={
-                  <Modal
-                    title={`#0${location.pathname.match(/\d+/)}`}
-                    onClose={goBack}
-                  >
+                  <Modal title='yfgbcfnm' onClose={goBack}>
                     <OrderInfo />
                   </Modal>
                 }
