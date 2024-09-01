@@ -5,13 +5,9 @@ import { getUser, fetchUpdateUser } from '../../services/slices/user-slice';
 
 export const Profile: FC = () => {
   /** TODO: взять переменную из стора */
+
   const user = useSelector(getUser);
   const dispatch = useDispatch();
-
-  // const user = {
-  //   name: '',
-  //   email: ''
-  // };
 
   const [formValue, setFormValue] = useState({
     name: user?.name ?? '',

@@ -2,27 +2,55 @@ import { FC, useMemo, useEffect } from 'react';
 import { TConstructorIngredient } from '@utils-types';
 import { BurgerConstructorUI } from '@ui';
 import { useSelector, useDispatch } from '../../services/store';
-import { getConstructorItems } from '../../services/slices/constructor-slice';
+import {
+  getConstructorItems,
+  clearConstructor
+} from '../../services/slices/constructor-slice';
+import {
+  getUserOrders,
+  getNewOrder,
+  getOrderRequest,
+  clearNewOrder,
+  fetchNewOrder
+} from '../../services/slices/user-order-slice';
+import { useNavigate } from 'react-router-dom';
+import { getUser } from '../../services/slices/user-slice';
 
 export const BurgerConstructor: FC = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   /** TODO: взять переменные constructorItems, orderRequest и orderModalData из стора */
-  // const constructorItems = {
-  //   bun: {
-  //     price: 0
-  //   },
-  //   ingredients: []
-  // };
+
   const constructorItems = useSelector(getConstructorItems);
+  const user = useSelector(getUser);
+  const orderRequest = useSelector(getOrderRequest);
+  const orderModalData = useSelector(getNewOrder);
 
-  const orderRequest = false;
+  useEffect(() => {
+    if (constructorItems.bun && constructorItems.ingredients) {
+      orderItems = [
+        constructorItems.bun._id,
+        ...constructorItems.ingredients.map((ingredient) => ingredient._id),
+        constructorItems.bun._id
+      ];
+    }
+  }, [constructorItems]);
 
-  const orderModalData = null;
+  let orderItems: string[] = [];
 
   const onOrderClick = () => {
-    if (!constructorItems.bun || orderRequest) return;
+    if (!user) {
+      navigate('/login');
+    } else if (constructorItems.bun && constructorItems.ingredients) {
+      dispatch(fetchNewOrder(orderItems));
+    }
   };
-  const closeOrderModal = () => {};
+
+  const closeOrderModal = () => {
+    dispatch(clearConstructor());
+    dispatch(clearNewOrder());
+    navigate('/');
+  };
 
   const price = useMemo(
     () =>
@@ -33,20 +61,6 @@ export const BurgerConstructor: FC = () => {
       ),
     [constructorItems]
   );
-
-  // let orderItems: string[] = [];
-
-  // useEffect(() => {
-  //   if (constructorItems.bun && constructorItems.ingredients) {
-  //     orderItems = [
-  //       constructorItems.bun._id,
-  //       ...constructorItems.ingredients.map((ingredient) => ingredient._id),
-  //       constructorItems.bun._id
-  //     ];
-  //   }
-  // }, [constructorItems]);
-
-  // return null;
 
   return (
     <BurgerConstructorUI

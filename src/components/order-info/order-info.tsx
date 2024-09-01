@@ -17,15 +17,6 @@ export const OrderInfo: FC = () => {
   const orderNumber = useParams().number;
   const dispatch = useDispatch();
   /** TODO: взять переменные orderData и ingredients из стора */
-  // const orderData = {
-  //   createdAt: '',
-  //   ingredients: [],
-  //   _id: '',
-  //   status: '',
-  //   name: '',
-  //   updatedAt: 'string',
-  //   number: 0
-  // };
 
   useEffect(() => {
     if (orderNumber) {
@@ -35,7 +26,6 @@ export const OrderInfo: FC = () => {
 
   const orderData = useSelector(getCurrentOrder);
 
-  // const ingredients: TIngredient[] = [];
   const ingredients = useSelector(getIngredientsSelector);
 
   /* Готовим данные для отображения */

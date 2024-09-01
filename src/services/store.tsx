@@ -7,12 +7,6 @@ import {
 } from 'react-redux';
 import { rootReducer } from './root-reducer';
 
-// export const store = configureStore({
-//   reducer: {
-//     ingredients: ingredientsReducer
-//   }
-// });
-
 const store = configureStore({
   reducer: rootReducer,
   devTools: process.env.NODE_ENV !== 'production'

@@ -1,5 +1,5 @@
 import { Navigate, useLocation } from 'react-router';
-import { useDispatch, useSelector } from '../../services/store';
+import { useSelector } from '../../services/store';
 import { getAuthChecked, getUser } from '../../services/slices/user-slice';
 import { Preloader } from '../ui/preloader/preloader';
 
@@ -31,13 +31,6 @@ export const ProtectedRoute = ({
 
   return component;
 };
-
-// //чтобы пропускать только авторизованных пользователей
-// export const OnlyAuth = ProtectedRoute;
-// //чтобы пропускать только неавторизованных
-// export const OnlyUnAuth = ({component }: { component: React.JSX.Element }) => (
-//   <ProtectedRoute onlyUnAuth component={component} />
-// );
 
 export const OnlyAuth = ProtectedRoute;
 export const OnlyUnAuth = ({ component }: { component: React.JSX.Element }) => (

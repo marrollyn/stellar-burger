@@ -7,7 +7,7 @@ import { getFeedOrders, fetchFeeds } from '../../services/slices/feed-slice';
 
 export const Feed: FC = () => {
   /** TODO: взять переменную из стора */
-  // const orders: TOrder[] = [];
+
   const dispatch = useDispatch();
   const orders: TOrder[] = useSelector(getFeedOrders);
   console.log(orders);

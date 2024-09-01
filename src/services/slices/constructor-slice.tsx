@@ -31,12 +31,6 @@ const constructorSlice = createSlice({
           default:
             state.ingredients.push(action.payload);
         }
-
-        // if (type === 'bun') {
-        //   state.bun = action.payload;
-        // } else {
-        //   state.ingredients.push(action.payload);
-        // }
       },
       prepare: (item: TIngredient) => {
         const id = nanoid();
@@ -77,16 +71,10 @@ const constructorSlice = createSlice({
   },
   selectors: {
     getConstructorItems: (state) => state
-    // getConstructorBuns: (state) => state.bun,
-    // getConstructorIngredients: (state) => state.ingredients
   }
 });
 
 export const constructorReducer = constructorSlice.reducer;
-export const {
-  getConstructorItems
-  // getConstructorBuns,
-  // getConstructorIngredients
-} = constructorSlice.selectors;
+export const { getConstructorItems } = constructorSlice.selectors;
 export const { addItem, deleteItem, clearConstructor, moveUp, moveDown } =
   constructorSlice.actions;

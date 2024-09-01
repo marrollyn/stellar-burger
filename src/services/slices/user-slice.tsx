@@ -32,9 +32,6 @@ const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    // authChecked: (state) => {
-    //     state.isAuthChecked = true;
-    // },
     setUser: (state, action: PayloadAction<TUser>) => {
       state.data = action.payload;
     },
@@ -60,16 +57,6 @@ const userSlice = createSlice({
         state.error = null;
         state.data = action.payload;
       });
-    // builder
-    //   .addCase(fetchGetUser.rejected, (state, action) => {
-    //     state.isAuthChecked = false;
-    //     state.error = action.error?.message || null;
-    //   })
-    //   .addCase(fetchGetUser.fulfilled, (state, action) => {
-    //     state.isAuthChecked = true;
-    //     state.data = action.payload;
-    //     state.error = null;
-    //   });
     builder
       .addCase(fetchLogin.pending, (state) => {
         state.isAuthChecked = false;
