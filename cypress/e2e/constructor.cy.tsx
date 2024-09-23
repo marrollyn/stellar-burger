@@ -7,18 +7,17 @@ describe('тестирование работы страницы констру�
     cy.intercept('GET', `${url}/ingredients`, {
       fixture: 'ingredients.json'
     }).as('getIngredients');
+
+    //задаем access токен
+    cy.setCookie('accessToken', 'fakeAccessToken');
+    localStorage.setItem('refreshToken', 'fakeRefreshToken');
+    
     //настроен перехват запроса на эндпоинт 'api/auth/user’
     cy.intercept('GET', `${url}/auth/user`, {
       fixture: 'user.json'
     }).as('getUser');
     //сервис должен быть доступен по адресу localhost:4000 и задан refreshtoken
-    cy.visit(testUrl, {
-      onBeforeLoad(win) {
-        win.localStorage.setItem('refreshToken', 'fakeReshToken');
-      }
-    });
-    //задаем access токен
-    cy.setCookie('accessToken', 'fakeAccessToken');
+    cy.visit(testUrl);
 
     //задаем алиасы
     cy.get('div').contains('Выберите булки').as('chooseBuns');
@@ -27,8 +26,8 @@ describe('тестирование работы страницы констру�
 
   afterEach(() => {
     //очищаем токены
-    cy.clearCookies();
-    cy.clearLocalStorage();
+    cy.setCookie('accessToken', '');
+    localStorage.setItem('refreshToken', '');
   });
 
   describe('добавление ингредиента из списка в конструктор', () => {
