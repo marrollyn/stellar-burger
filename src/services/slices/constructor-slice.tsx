@@ -11,7 +11,7 @@ type TInitialState = {
   ingredients: TConstructorIngredient[];
 };
 
-const initialState: TInitialState = {
+export const initialState: TInitialState = {
   bun: null,
   ingredients: []
 };

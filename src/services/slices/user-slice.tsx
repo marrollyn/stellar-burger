@@ -10,7 +10,7 @@ import {
   TLoginData,
   TRegisterData,
   TUserResponse
-} from '@api';
+} from '../../utils/burger-api';
 import { TUser } from '@utils-types';
 import { setCookie, deleteCookie, getCookie } from '../../utils/cookie';
 
@@ -21,7 +21,7 @@ type TInitialState = {
   isAuthChecked: boolean;
 };
 
-const initialState: TInitialState = {
+export const initialState: TInitialState = {
   data: null,
   loading: false,
   error: null,
