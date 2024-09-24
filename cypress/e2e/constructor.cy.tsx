@@ -11,7 +11,7 @@ describe('тестирование работы страницы констру�
     //задаем access токен
     cy.setCookie('accessToken', 'fakeAccessToken');
     localStorage.setItem('refreshToken', 'fakeRefreshToken');
-    
+
     //настроен перехват запроса на эндпоинт 'api/auth/user’
     cy.intercept('GET', `${url}/auth/user`, {
       fixture: 'user.json'
@@ -90,11 +90,12 @@ describe('тестирование работы страницы констру�
   describe('создание заказа', () => {
     beforeEach(() => { });
 
-    // it('Проверка пользователя с моковыми данными', () => {
-    //   cy.get('[data-cy="user"]').contains('Joe Doe').should('exist');
-    // });
+    it('проверка пользователя', () => {
+      cy.get('[data-cy="user"]').contains('Joe Doe').should('exist');
+      // cy.contains('Joe Doe').should('exist');
+    });
 
-    it('проверка созданного заказа', () => {
+    it('проверка создания заказа', () => {
       //перехватываем данные заказа
       cy.intercept('POST', `${url}/orders`, {
         fixture: 'order.json'
